@@ -1,0 +1,1 @@
+rootProject.name = "com.usda-nutrient-ktor-api"
