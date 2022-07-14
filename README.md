@@ -1,0 +1,2 @@
+# nutrient-ktor-api
+Simple REST API written in Kotlin and using the Ktor framework with CRUD operations on MongoDB. Mock data is pulled from the USDA National Nutrient Database ([source](https://www.kaggle.com/datasets/haithemhermessi/usda-national-nutrient-database)). 
