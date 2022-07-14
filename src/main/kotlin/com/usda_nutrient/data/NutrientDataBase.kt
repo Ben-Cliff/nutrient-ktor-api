@@ -8,3 +8,8 @@ private val client = KMongo.createClient().coroutine
 private val database = client.getDatabase("NutritionalDatabase")
 
 private val items = database.getCollection<Item>()
+
+suspend fun getItemForId(id: String): Item{
+    // find the items with this id among all the items
+    return items.findOneById(id)
+}
