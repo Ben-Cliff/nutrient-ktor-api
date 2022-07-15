@@ -10,5 +10,5 @@ data class Item (
     val Protein_g: Int,
     val Fat_g: Int,
     @BsonId
-    val ID: String = ObjectId().toString()
+    var id: String = ObjectId().toString()
 )
