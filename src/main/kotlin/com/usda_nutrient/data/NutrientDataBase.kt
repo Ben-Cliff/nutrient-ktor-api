@@ -4,6 +4,7 @@ import com.usda_nutrient.data.model.Item
 import org.bson.types.ObjectId
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
+import org.litote.kmongo.eq
 
 private val client = KMongo.createClient().coroutine
 private val database = client.getDatabase("NutritionalDatabase")
@@ -30,3 +31,11 @@ suspend fun createIdOrUpdateIdForId(item: Item): Boolean {
         items.insertOne(item).wasAcknowledged() //wasAcknowledged returns true if query is successful
     }
 }
+
+suspend fun deleteItemForId(itemId: String): Boolean {
+    val item = items.findOne(Item::id eq itemId)
+    item?.let { item ->
+        return items.deleteOneById(item.id).wasAcknowledged()
+    } ?: return false }
+
+

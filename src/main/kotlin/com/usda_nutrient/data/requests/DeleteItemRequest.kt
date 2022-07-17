@@ -1,4 +1,5 @@
 package com.usda_nutrient.data.requests
 
-class DeletItemRequest {
-}
+data class DeleteItemRequest (
+    val id: String
+)
