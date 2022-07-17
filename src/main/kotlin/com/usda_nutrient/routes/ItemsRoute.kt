@@ -47,7 +47,7 @@ fun Route.itemsRoutes() {
             val request = try {
                 call.receive<Item>()
                 // TODO: 15.07.22 change throwable exception to  ContentTransformationException
-            }catch(exception: Throwable){
+            }catch(e:Exception){
                 call.respond(HttpStatusCode.BadRequest)
                 return@post
             }
@@ -65,23 +65,25 @@ fun Route.itemsRoutes() {
 
         }
     }
+
+    // TODO: can take in an empty id string
     route("/delete-item") {
         post {
             val request = try {
                 call.receive<DeleteItemRequest>()
-            } catch (e: Throwable) {
+            } catch (e:Exception) {
                 call.respond(HttpStatusCode.BadRequest)
                 return@post
             }
             if (deleteItemForId(request.id)) {
                 call.respond(
                     HttpStatusCode.OK,
-                    it
+                    "Item successfully deleted : ${it}"
                 )
             } else {
                 call.respond(
                     HttpStatusCode.OK,
-                    it
+                    "Item was not found therefore not deleted: ${it}"
                 )
             }
         }
