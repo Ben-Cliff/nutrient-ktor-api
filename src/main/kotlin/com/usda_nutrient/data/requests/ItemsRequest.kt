@@ -1,5 +1,5 @@
 package com.usda_nutrient.data.requests
 
-data class ItemsRequest(
+data class ItemRequest(
     val id: String
 )
