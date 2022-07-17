@@ -12,7 +12,7 @@ fun Application.configureRouting() {
     routing {
         itemsRoutes()
         get("/") {
-            call.respondText("Hello World!")
+            call.respondText("USDA Nutrtion App")
         }
     }
 }
