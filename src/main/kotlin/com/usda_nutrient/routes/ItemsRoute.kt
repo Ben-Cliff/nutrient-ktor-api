@@ -1,5 +1,6 @@
 package com.usda_nutrient.routes
 
+import com.usda_nutrient.data.ResponseHandler
 import com.usda_nutrient.data.createIdOrUpdateIdForId
 import com.usda_nutrient.data.deleteItemForId
 import com.usda_nutrient.data.getItemForId
@@ -30,12 +31,12 @@ fun Route.itemsRoutes() {
             item?.let {
                 call.respond(
                     HttpStatusCode.OK,
-                    it
+                    ResponseHandler(true, "Employee successfully retrieved", it)
                 )
             } // Else item is null return  null
                 ?: call.respond(
-                HttpStatusCode.OK,
-                "item id is null or else something something: ${it}"
+                    HttpStatusCode.OK,
+                    ResponseHandler(true, "There is no employee with this id", it)
             )
         }
     }
@@ -55,7 +56,7 @@ fun Route.itemsRoutes() {
             if(createIdOrUpdateIdForId(request)){
                 call.respond(
                     HttpStatusCode.OK,
-                    "Item successfully created and or updated"
+                    ResponseHandler(true, "Employee successfully created/ updated", Unit)
                 )
             }
             //If there is a conflict (server state not ready and prevents post)
@@ -78,12 +79,12 @@ fun Route.itemsRoutes() {
             if (deleteItemForId(request.id)) {
                 call.respond(
                     HttpStatusCode.OK,
-                    "Item successfully deleted : ${it}"
+                    ResponseHandler(true, "Employee successfully deleted", Unit)
                 )
             } else {
                 call.respond(
                     HttpStatusCode.OK,
-                    "Item was not found therefore not deleted: ${it}"
+                    ResponseHandler(true, "Employee not found", Unit)
                 )
             }
         }
