@@ -1,8 +1,10 @@
 package com.usda_nutrient.routes
 
 import com.usda_nutrient.data.createIdOrUpdateIdForId
+import com.usda_nutrient.data.deleteItemForId
 import com.usda_nutrient.data.getItemForId
 import com.usda_nutrient.data.model.Item
+import com.usda_nutrient.data.requests.DeleteItemRequest
 import com.usda_nutrient.data.requests.ItemRequest
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -61,6 +63,27 @@ fun Route.itemsRoutes() {
                 call.respond(HttpStatusCode.Conflict)
             }
 
+        }
+    }
+    route("/delete-item") {
+        post {
+            val request = try {
+                call.receive<DeleteItemRequest>()
+            } catch (e: Throwable) {
+                call.respond(HttpStatusCode.BadRequest)
+                return@post
+            }
+            if (deleteItemForId(request.id)) {
+                call.respond(
+                    HttpStatusCode.OK,
+                    it
+                )
+            } else {
+                call.respond(
+                    HttpStatusCode.OK,
+                    it
+                )
+            }
         }
     }
 }
