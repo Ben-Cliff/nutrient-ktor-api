@@ -31,12 +31,12 @@ fun Route.itemsRoutes() {
             item?.let {
                 call.respond(
                     HttpStatusCode.OK,
-                    ResponseHandler(true, "Employee successfully retrieved", it)
+                    ResponseHandler(true, "Food item successfully retrieved", it)
                 )
             } // Else item is null return  null
                 ?: call.respond(
                     HttpStatusCode.OK,
-                    ResponseHandler(true, "There is no employee with this id", it)
+                    ResponseHandler(true, "There is no Food item with this id", it)
             )
         }
     }
@@ -56,7 +56,7 @@ fun Route.itemsRoutes() {
             if(createIdOrUpdateIdForId(request)){
                 call.respond(
                     HttpStatusCode.OK,
-                    ResponseHandler(true, "Employee successfully created/ updated", Unit)
+                    ResponseHandler(true, "Food item successfully created/ updated", Unit)
                 )
             }
             //If there is a conflict (server state not ready and prevents post)
@@ -79,12 +79,12 @@ fun Route.itemsRoutes() {
             if (deleteItemForId(request.id)) {
                 call.respond(
                     HttpStatusCode.OK,
-                    ResponseHandler(true, "Employee successfully deleted", Unit)
+                    ResponseHandler(true, "Food item successfully deleted", Unit)
                 )
             } else {
                 call.respond(
                     HttpStatusCode.OK,
-                    ResponseHandler(true, "Employee not found", Unit)
+                    ResponseHandler(true, "Food item not found", Unit)
                 )
             }
         }
